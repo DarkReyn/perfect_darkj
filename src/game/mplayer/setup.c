@@ -102,6 +102,7 @@ struct mparena g_MpArenas[] = {
 	// Stage, unlock, name
 	{ STAGE_MP_SKEDAR,     0,                          L_MPMENU_119 },
 	{ STAGE_MP_PIPES,      0,                          L_MPMENU_120 },
+#ifdef PLATFORM_N64
 	{ STAGE_MP_RAVINE,     MPFEATURE_STAGE_RAVINE,     L_MPMENU_121 },
 	{ STAGE_MP_G5BUILDING, MPFEATURE_STAGE_G5BUILDING, L_MPMENU_122 },
 	{ STAGE_MP_SEWERS,     MPFEATURE_STAGE_SEWERS,     L_MPMENU_123 },
@@ -116,12 +117,80 @@ struct mparena g_MpArenas[] = {
 	{ STAGE_MP_TEMPLE,     MPFEATURE_STAGE_TEMPLE,     L_MPMENU_133 },
 	{ STAGE_MP_COMPLEX,    MPFEATURE_STAGE_COMPLEX,    L_MPMENU_134 },
 	{ STAGE_MP_FELICITY,   MPFEATURE_STAGE_FELICITY,   L_MPMENU_135 },
+#else // All Solos in Multi Mod
+	{ STAGE_MP_RAVINE,       0, L_MPMENU_121  },
+	{ STAGE_MP_G5BUILDING,   0, L_MPMENU_122  },
+	{ STAGE_MP_SEWERS,       0, L_MPMENU_123  },
+	{ STAGE_MP_WAREHOUSE,    0, L_MPMENU_124  },
+	{ STAGE_MP_GRID,         0, L_MPMENU_125  },
+	{ STAGE_MP_RUINS,        0, L_MPMENU_126  },
+	{ STAGE_MP_AREA52,       0, L_MPMENU_127  },
+	{ STAGE_MP_BASE,         0, L_MPMENU_128  },
+	{ STAGE_MP_FORTRESS,     0, L_MPMENU_130  },
+	{ STAGE_MP_VILLA,        0, L_MPMENU_131  },
+	{ STAGE_MP_CARPARK,      0, L_MPMENU_132  },
+	{ STAGE_DEFECTION,       0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_134 : L_OPTIONS_133) }, // dataDyne Central
+	{ STAGE_INVESTIGATION,   0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_136 : L_OPTIONS_135) }, // dataDyne Research
+	{ STAGE_VILLA,           0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_140 : L_OPTIONS_139) }, // Carrington Villa
+	{ STAGE_CHICAGO,         0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_142 : L_OPTIONS_141) }, // Chicago
+	{ STAGE_G5BUILDING,      0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_144 : L_OPTIONS_143) }, // G5 Building
+	{ STAGE_INFILTRATION,    0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_146 : L_OPTIONS_145) }, // Area 51
+	{ STAGE_AIRBASE,         0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_152 : L_OPTIONS_151) }, // Air Base
+	{ STAGE_AIRFORCEONE,     0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_154 : L_OPTIONS_153) }, // Air Force One
+	{ STAGE_CRASHSITE,       0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_156 : L_OPTIONS_155) }, // Crash Site
+	{ STAGE_PELAGIC,         0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_158 : L_OPTIONS_157) }, // Pelagic II
+	{ STAGE_DEEPSEA,         0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_160 : L_OPTIONS_159) }, // Deep Sea
+	{ STAGE_DEFENSE,         0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_162 : L_OPTIONS_161) }, // Carrington Institute
+	{ STAGE_ATTACKSHIP,      0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_164 : L_OPTIONS_163) }, // Attack Ship
+	{ STAGE_SKEDARRUINS,     0, (VERSION == VERSION_JPN_FINAL ? L_OPTIONS_166 : L_OPTIONS_165) }, // Skedar Ruins
+	{ STAGE_MP_TEMPLE,       0, L_MPMENU_133  }, // Temple
+	{ STAGE_MP_COMPLEX,      0, L_MPMENU_134  }, // Complex
+	{ STAGE_TEST_MP6,        0, L_MPMENU_411  }, // Caves (PD Plus)
+	{ STAGE_TEST_MP2,        0, L_MPMENU_129  }, // Stack (PD Plus)
+	{ STAGE_MP_FELICITY,     0, L_MPMENU_135  }, // Felicity
+	// GoldenEye X Mod
+	{ STAGE_MP_SKEDAR + 0x60,     0, L_MPMENU_133 }, // Tample
+	{ STAGE_MP_COMPLEX + 0x60,    0, L_MPMENU_134 }, // Complex
+	{ STAGE_MP_AREA52 + 0x60,     0, L_MPMENU_306 }, // Caves
+	{ STAGE_MP_WAREHOUSE + 0x60,  0, L_MPMENU_303 }, // Library
+	{ STAGE_MP_SEWERS + 0x60,     0, L_MPMENU_302 }, // Basement
+	{ STAGE_MP_FORTRESS + 0x60,   0, L_MPMENU_309 }, // Stack
+	{ STAGE_MP_CARPARK + 0x60,    0, L_MPMENU_311 }, // Facility
+	{ STAGE_TEST_MP6 + 0x60,      0, L_MPMENU_300 }, // Bunker
+	{ STAGE_MP_TEMPLE + 0x60,     0, L_MPMENU_299 }, // Archives
+	{ STAGE_MP_RUINS + 0x60,      0, L_MPMENU_305 }, // Caverns
+	{ STAGE_MP_FELICITY + 0x60,   0, L_MPMENU_312 }, // Egyptian
+	{ STAGE_TEST_MP17 + 0x60,     0, L_MPMENU_307 }, // Facility BZ
+	{ STAGE_MP_RAVINE + 0x60,     0, L_MPMENU_298 }, // Frigate
+	{ STAGE_TEST_SILO + 0x60,     0, L_MPMENU_314 }, // Archives 1F (GE-X 5e)
+	{ STAGE_TEST_MP16 + 0x60,     0, L_MPMENU_322 }, // Archives BZ
+	{ STAGE_TEST_MP14 + 0x60,     0, L_MPMENU_315 }, // Streets
+	{ STAGE_MP_G5BUILDING + 0x60, 0, L_MPMENU_310 }, // Train
+	{ STAGE_TEST_MP18 + 0x60,     0, L_MPMENU_304 }, // Cradle
+	{ STAGE_MP_PIPES + 0x60,      0, L_MPMENU_313 }, // Aztec
+	{ STAGE_TEST_MP20 + 0x60,     0, L_MPMENU_308 }, // Citadel
+	{ STAGE_TEST_MP19 + 0x60,     0, L_MPMENU_301 }, // Labyrinth
+	{ STAGE_TEST_MP2 + 0x60,      0, L_MPMENU_316 }, // Icicle Pyramid
+	{ STAGE_TEST_MP8 + 0x60,      0, L_MPMENU_323 }, // Cliff Base
+	// Kakariko Village Mod
+	{ STAGE_24,                   0, L_MPMENU_319 }, // Kakariko Village (Stormy)
+	// Dark Noon Mod
+	{ STAGE_TEST_MP7,             0, L_MPMENU_321 }, // Valley
+	// Random
+	{ STAGE_MP_RANDOM_MULTI, 0, L_MPMENU_294 }, // Random Multi
+	{ STAGE_MP_RANDOM_SOLO,  0, L_MPMENU_295 }, // Random Solo
+	{ STAGE_MP_RANDOM_GEX,   0, L_MPMENU_317 }, // Random GoldenEye X
+#endif
 	{ 1,                   0,                          L_MPMENU_136 }, // "Random"
 };
 
 s32 mpGetNumStages(void)
 {
+#ifdef PLATFORM_N64
 	return 17;
+#else // All Solos in Multi Mod (57 Stage + 4 Random)
+	return 61;
+#endif
 }
 
 s16 mpChooseRandomStage(void)
@@ -130,7 +199,11 @@ s16 mpChooseRandomStage(void)
 	s32 numchallengescomplete = 0;
 	s32 index;
 
+#ifdef PLATFORM_N64
 	for (i = 0; i < 16; i++) {
+#else // All Solos in Multi Mod
+	for (i = 0; i < 57; i++) {
+#endif
 		if (challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
 			numchallengescomplete++;
 		}
@@ -138,7 +211,11 @@ s16 mpChooseRandomStage(void)
 
 	index = rngRandom() % numchallengescomplete;
 
+#ifdef PLATFORM_N64
 	for (i = 0; i < 16; i++) {
+#else // All Solos in Multi Mod
+	for (i = 0; i < 57; i++) {
+#endif
 		if (challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
 			if (index == 0) {
 				return g_MpArenas[i].stagenum;
@@ -151,12 +228,106 @@ s16 mpChooseRandomStage(void)
 	return STAGE_MP_SKEDAR;
 }
 
+#ifndef PLATFORM_N64 // All Solos in Multi Mod
+s16 mpChooseRandomMultiStage(void)
+{
+	s32 i;
+	s32 numchallengescomplete = 0;
+	s32 index;
+
+	for (i = 0; i < 32; i++) {
+		if ((i <= 12 || i >= 27) && challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
+			numchallengescomplete++;
+		}
+	}
+
+	index = rngRandom() % numchallengescomplete;
+
+	for (i = 0; i < 32; i++) {
+		if ((i <= 12 || i >= 27) && challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
+			if (index == 0) {
+				return g_MpArenas[i].stagenum;
+			}
+
+			index--;
+		}
+	}
+
+	return STAGE_MP_SKEDAR;
+}
+
+s16 mpChooseRandomSoloStage(void)
+{
+	s32 i;
+	s32 numchallengescomplete = 0;
+	s32 index;
+
+	for (i = 0; i < 27; i++) {
+		if ((i >= 13 && i <= 26) && challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
+			numchallengescomplete++;
+		}
+	}
+
+	index = rngRandom() % numchallengescomplete;
+
+	for (i = 0; i < 27; i++) {
+		if ((i >= 13 && i <= 26) && challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
+			if (index == 0) {
+				return g_MpArenas[i].stagenum;
+			}
+
+			index--;
+		}
+	}
+
+	return STAGE_DEFECTION;
+}
+
+s16 mpChooseRandomGexStage(void)
+{
+	s32 i;
+	s32 numchallengescomplete = 0;
+	s32 index;
+
+	for (i = 0; i < 55; i++) {
+		if (i >= 32 && i <= 54 && challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
+			numchallengescomplete++;
+		}
+	}
+
+	index = rngRandom() % numchallengescomplete;
+
+	for (i = 0; i < 55; i++) {
+		if (i >= 32 && i <= 54 && challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
+			if (index == 0) {
+				return g_MpArenas[i].stagenum;
+			}
+
+			index--;
+		}
+	}
+
+	return STAGE_MP_SKEDAR + 0x60;
+}
+#endif
+
+
 MenuItemHandlerResult mpArenaMenuHandler(s32 operation, struct menuitem *item, union handlerdata *data)
 {
 	struct optiongroup groups[] = {
 		{ 0,  L_MPMENU_116 }, // "Dark"
+#ifdef PLATFORM_N64
 		{ 13, L_MPMENU_117 }, // "Classic"
 		{ 16, L_MPMENU_118 }, // "Random"
+#else // All Solos in Multi Mod
+		{ 13, L_OPTIONS_117 }, // "Solo Missions"
+		{ 27, L_MPMENU_117  }, // "Classic"
+		{ 32, L_MPMENU_296  }, // "GoldenEye X"
+		{ 43, L_MPMENU_297  }, // "GoldenEye X Bonus"
+		{ 55, L_MPMENU_318  }, // "Zelda"
+		{ 56, L_MPMENU_320  }, // "Dark Noon"
+		{ 57, L_MPMENU_118  }, // "Random"
+#endif
 	};
 
 	s32 i;
@@ -209,33 +380,43 @@ MenuItemHandlerResult mpArenaMenuHandler(s32 operation, struct menuitem *item, u
 		}
 		break;
 	case MENUOP_GETOPTGROUPCOUNT:
+#ifdef PLATFORM_N64
 		data->list.value = 3;
+#else // All Solos in Multi Mod
+		data->list.value = 8;
+#endif
 
+#ifdef PLATFORM_N64 // All Solos in Multi Mod
 		if (!challengeIsFeatureUnlocked(MPFEATURE_STAGE_COMPLEX)
 				&& !challengeIsFeatureUnlocked(MPFEATURE_STAGE_TEMPLE)
 				&& !challengeIsFeatureUnlocked(MPFEATURE_STAGE_FELICITY)) {
 			data->list.value--;
 		}
+#endif
 		break;
 	case MENUOP_GETOPTGROUPTEXT:
 		count = data->list.value;
 
+#ifdef PLATFORM_N64 // All Solos in Multi Mod
 		if (!challengeIsFeatureUnlocked(MPFEATURE_STAGE_COMPLEX)
 				&& !challengeIsFeatureUnlocked(MPFEATURE_STAGE_TEMPLE)
 				&& !challengeIsFeatureUnlocked(MPFEATURE_STAGE_FELICITY)
 				&& count > 0) {
 			count++;
 		}
+#endif
 		return (uintptr_t)langGet(groups[count].name);
 	case MENUOP_GETGROUPSTARTINDEX:
 		groupindex = data->list.value;
 
+#ifdef PLATFORM_N64 // All Solos in Multi Mod
 		if (!challengeIsFeatureUnlocked(MPFEATURE_STAGE_COMPLEX)
 				&& !challengeIsFeatureUnlocked(MPFEATURE_STAGE_TEMPLE)
 				&& !challengeIsFeatureUnlocked(MPFEATURE_STAGE_FELICITY)
 				&& groupindex == 1) {
 			groupindex++;
 		}
+#endif
 
 		for (i = 0; i < groups[groupindex].offset; i++) {
 			if (challengeIsFeatureUnlocked(g_MpArenas[i].requirefeature)) {
@@ -1165,6 +1346,155 @@ struct menudialogdef g_MpSaveSetupExistsMenuDialog = {
 };
 
 #ifndef PLATFORM_N64
+MenuItemHandlerResult mpSelectRandomWeaponListHandler(s32 operation, struct menuitem *item, union handlerdata *data)
+{
+	static const char *labels[] = {
+		"Select Dark",
+		"Select Classic",
+		"Select All",
+		"Select None",
+	};
+
+	switch (operation) {
+	case MENUOP_GETOPTIONCOUNT:
+		data->list.value = mpGetNumWeaponOptions() + 4;
+		break;
+	case MENUOP_GETOPTIONTEXT:
+		{
+			s32 numweapons = mpGetNumWeaponOptions();
+
+			if (data->list.value < numweapons) {
+				return (uintptr_t) mpGetWeaponLabel(data->list.value);
+			} else {
+				return (intptr_t)labels[data->list.value - numweapons];
+			}
+		}
+	case MENUOP_SET:
+		{
+			s32 numweapons = mpGetNumWeaponOptions();
+			s32 mpweaponnum = data->list.value;
+			s32 optionindex = mpweaponnum;
+			s32 i;
+
+			if (data->list.value < numweapons) {
+				if (data->list.unk04 == 0) {
+					for (i = 0; i <= mpweaponnum; i++) {
+						if (challengeIsFeatureUnlocked(g_MpWeapons[i].unlockfeature) == 0) {
+							mpweaponnum++;
+						}
+
+						optionindex = mpweaponnum;
+					}
+
+					g_MpWeaponSetRandomFilters[optionindex] = 1 - g_MpWeaponSetRandomFilters[optionindex];
+				}
+			} else {
+				s32 index = data->list.value - numweapons;
+
+				switch (index) {
+				case 0:
+					// Select Dark
+					for (i = 0; i < ARRAYCOUNT(g_MpWeapons); i++) {
+						if ((i >= MPWEAPON_NONE && i <= MPWEAPON_COMBATBOOST) || i >= MPWEAPON_SHIELD) {
+							g_MpWeaponSetRandomFilters[i] = 1;
+						} else {
+							g_MpWeaponSetRandomFilters[i] = 0;
+						}
+					}
+					break;
+				case 1:
+					// Select Classic
+					for (i = 0; i < ARRAYCOUNT(g_MpWeapons); i++) {
+						if (i >= MPWEAPON_PP9I && i <= MPWEAPON_RCP45) {
+							g_MpWeaponSetRandomFilters[i] = 1;
+						} else {
+							g_MpWeaponSetRandomFilters[i] = 0;
+						}
+					}
+					break;
+				case 2:
+					// Select All
+					for (i = 0; i < ARRAYCOUNT(g_MpWeapons); i++) {
+						g_MpWeaponSetRandomFilters[i] = 1;
+					}
+					break;
+				case 3:
+					// Select None
+					for (i = 0; i < ARRAYCOUNT(g_MpWeapons); i++) {
+						g_MpWeaponSetRandomFilters[i] = 0;
+					}
+					break;
+				}
+			}
+		}
+		break;
+	case MENUOP_GETSELECTEDINDEX:
+		data->list.value = 0x000fffff;
+		break;
+	case MENUOP_GETLISTITEMCHECKBOX:
+		{
+			s32 numweapons = mpGetNumWeaponOptions();
+			s32 mpweaponnum = data->list.value;
+			s32 optionindex = mpweaponnum;
+			s32 i;
+
+			if (data->list.value < numweapons) {
+
+				for (i = 0; i <= mpweaponnum; i++) {
+					if (challengeIsFeatureUnlocked(g_MpWeapons[i].unlockfeature) == 0) {
+						mpweaponnum++;
+					}
+
+					optionindex = mpweaponnum;
+				}
+
+				data->list.unk04 = g_MpWeaponSetRandomFilters[optionindex];
+			}
+		}
+		break;
+	}
+
+	return 0;
+}
+
+struct menuitem g_MpSelectRandomWeaponsMenuItems[] = {
+	{
+		MENUITEMTYPE_LIST,
+		0,
+		MENUITEMFLAG_LOCKABLEMINOR,
+		0x00000078,
+		0x0000004d,
+		mpSelectRandomWeaponListHandler,
+	},
+	{ MENUITEMTYPE_END },
+};
+
+struct menudialogdef g_MpSelectRandomWeaponsMenuDialog = {
+	MENUDIALOGTYPE_DEFAULT,
+	(uintptr_t)"Select Weapons",
+	g_MpSelectRandomWeaponsMenuItems,
+	NULL,
+	MENUDIALOGFLAG_LITERAL_TEXT,
+	NULL,
+};
+
+MenuItemHandlerResult menuhandlerMpSelectRandomWeapons(s32 operation, struct menuitem *item, union handlerdata *data)
+{
+	switch (operation) {
+	case MENUOP_CHECKDISABLED:
+	case MENUOP_CHECKHIDDEN:
+		if (g_MpWeaponSetNum == WEAPONSET_RANDOM
+				|| g_MpWeaponSetNum == WEAPONSET_RANDOMFIVE) {
+			return false;
+		}
+		return true;
+	case MENUOP_SET:
+		menuPushDialog(&g_MpSelectRandomWeaponsMenuDialog);
+	}
+
+	return 0;
+}
+
 MenuItemHandlerResult menuhandlerMpAutoRandomWeapon(s32 operation, struct menuitem *item, union handlerdata *data)
 {
 	static const char *labels[] = {
@@ -1220,6 +1550,14 @@ struct menuitem g_MpWeaponsMenuItems[] = {
 		menuhandlerMpWeaponSetDropdown,
 	},
 #ifndef PLATFORM_N64
+	{
+		MENUITEMTYPE_SELECTABLE,
+		0,
+		MENUITEMFLAG_LITERAL_TEXT,
+		(uintptr_t)"Select Weapons\n",
+		0,
+		menuhandlerMpSelectRandomWeapons,
+	},
 	{
 		MENUITEMTYPE_DROPDOWN,
 		0,
