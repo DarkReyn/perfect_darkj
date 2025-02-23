@@ -1360,6 +1360,7 @@ char inputGetLastTextChar(void)
 	return lastChar;
 }
 
+
 static inline s32 filterChar(const char ch)
 {
 	return isalnum(ch) || ch == ' ' || ch == '?' || ch == '!' || ch == '.';
@@ -1369,11 +1370,19 @@ s32 inputTextHandler(char *out, const u32 outSize, s32 *curCol, s32 oskCharsOnly
 {
 	const s32 ctrlHeld = inputGetKeyModState() & KM_CTRL;
 
+/* >>>>>>> port-net
+s32 inputTextHandler(char *out, const u32 outSize, s32 *curCol)
+{
+	const s32 ctrlHeld = inputKeyPressed(VK_LCTRL) || inputKeyPressed(VK_RCTRL);
+*/
+
 	if (!ctrlHeld) {
 		const char chr = inputGetLastTextChar();
 		inputClearLastTextChar();
+
 		const s32 valid = chr && (oskCharsOnly ? filterChar(chr) : isprint(chr));
 		if (valid) {
+
 			if (*curCol < outSize - 1) {
 				out[(*curCol)++] = chr;
 				out[*curCol] = '\0';
@@ -1442,11 +1451,10 @@ void inputStopTextInput(void)
 	textInput = 0;
 }
 
-s32 inputIsTextInputActive(void)
+s32 inputIsTextInputActive(void) // <<<<<<< port-mods/all-in-one
 {
 	return textInput;
 }
-
 u32 inputGetKeyModState(void)
 {
 	return SDL_GetModState();

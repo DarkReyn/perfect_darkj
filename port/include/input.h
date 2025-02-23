@@ -250,15 +250,18 @@ void inputMouseShowCursor(s32 show);
 
 void inputStartTextInput(void);
 void inputStopTextInput(void);
+
 s32 inputIsTextInputActive(void);
 
 void inputClearLastTextChar(void);
 char inputGetLastTextChar(void);
 
+
 s32 inputTextHandler(char *out, const u32 outSize, s32 *curCol, s32 oskCharsOnly);
 
 void inputClearClipboard(void);
 const char *inputGetClipboard(void);
+
 
 // returns keymod values
 u32 inputGetKeyModState(void);
