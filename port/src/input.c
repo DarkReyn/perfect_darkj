@@ -333,6 +333,14 @@ static inline void inputInitController(const s32 cidx, const s32 jidx)
 
 	sysLogPrintf(LOG_NOTE, "input: assigned controller '%d: (%s)' (id %d) to player %d",
 		jidx, SDL_GameControllerName(pads[cidx]), inputControllerGetId(pads[cidx]), cidx);
+
+	SDL_Joystick* joy = SDL_GameControllerGetJoystick(pads[cidx]);
+	if (joy) {
+		char guidStr[1024] = "";
+		SDL_JoystickGUID guid = SDL_JoystickGetGUID(joy);
+		SDL_JoystickGetGUIDString(guid, guidStr, sizeof(guidStr));
+		sysLogPrintf(LOG_NOTE, "input: GUID for controller %d: %s", jidx, guidStr);
+	}
 }
 
 static inline void inputCloseController(const s32 cidx)
@@ -820,8 +828,12 @@ static inline void inputUpdateMouse(void)
 
 	mouseWheel = 0;
 
+	s32 mdx = 0;
+	s32 mdy = 0;
+	SDL_GetRelativeMouseState(&mdx, &mdy);
 	if (mouseLocked) {
-		SDL_GetRelativeMouseState(&mouseDX, &mouseDY);
+		mouseDX = mdx;
+		mouseDY = mdy;
 	} else {
 		mouseDX = mx - mouseX;
 		mouseDY = my - mouseY;
@@ -1348,14 +1360,29 @@ char inputGetLastTextChar(void)
 	return lastChar;
 }
 
+
+static inline s32 filterChar(const char ch)
+{
+	return isalnum(ch) || ch == ' ' || ch == '?' || ch == '!' || ch == '.';
+}
+
+s32 inputTextHandler(char *out, const u32 outSize, s32 *curCol, s32 oskCharsOnly)
+{
+	const s32 ctrlHeld = inputGetKeyModState() & KM_CTRL;
+
+/* >>>>>>> port-net
 s32 inputTextHandler(char *out, const u32 outSize, s32 *curCol)
 {
 	const s32 ctrlHeld = inputKeyPressed(VK_LCTRL) || inputKeyPressed(VK_RCTRL);
+*/
 
 	if (!ctrlHeld) {
 		const char chr = inputGetLastTextChar();
 		inputClearLastTextChar();
-		if (chr && isprint(chr)) {
+
+		const s32 valid = chr && (oskCharsOnly ? filterChar(chr) : isprint(chr));
+		if (valid) {
+
 			if (*curCol < outSize - 1) {
 				out[(*curCol)++] = chr;
 				out[*curCol] = '\0';
@@ -1422,6 +1449,15 @@ void inputStopTextInput(void)
 {
 	SDL_StopTextInput();
 	textInput = 0;
+}
+
+s32 inputIsTextInputActive(void) // <<<<<<< port-mods/all-in-one
+{
+	return textInput;
+}
+u32 inputGetKeyModState(void)
+{
+	return SDL_GetModState();
 }
 
 PD_CONSTRUCTOR static void inputConfigInit(void)

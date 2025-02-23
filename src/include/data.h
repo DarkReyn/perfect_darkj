@@ -497,9 +497,17 @@ extern struct menudialogdef g_MpQuickTeamScenarioMenuDialog;
 extern s32 var80087260;
 extern bool g_MpEnableMusicSwitching;
 extern struct mpweapon g_MpWeapons[NUM_MPWEAPONS];
+#ifdef PLATFORM_N64
 extern struct mphead g_MpHeads[VERSION == VERSION_JPN_FINAL ? 74 : 75];
+#else // PD Plus Mod
+extern struct mphead g_MpHeads[VERSION == VERSION_JPN_FINAL ? 75 : 76];
+#endif
 extern struct botprofile g_BotProfiles[18];
+#ifdef PLATFORM_N64
 extern struct mpbody g_MpBodies[61];
+#else // PD Plus Mod
+extern struct mpbody g_MpBodies[63];
+#endif
 extern struct mppreset g_MpPresets[];
 extern u32 g_TeamColours[];
 extern u32 var80087ce4[];
@@ -541,6 +549,7 @@ extern const struct weathercfg g_DefaultWeatherConfig;
 extern const struct weathercfg *g_CurWeatherConfig;
 
 extern s32 g_MenuUsingMouse;
+extern s32 g_MenuKeyboardPlayer;
 
 extern f32 g_ViShakeIntensityMult;
 extern u32 g_TexFilter2D;
@@ -558,7 +567,10 @@ extern s32 g_MusicDisableMpDeath;
 extern s32 g_BgunGeMuzzleFlashes;
 extern s32 g_FileAutoSelect;
 
-extern s32 g_NetMode;
+extern u8 g_MpWeaponSetRandomFilters[NUM_MPWEAPONS]; // <<<<<<< port-mods/all-in-one
+extern s32 g_MpWeaponRandomFilterNum; // <<<<<<< port-mods/all-in-one
+
+extern s32 g_NetMode; // >>>>>>> port-net
 
 #define PLAYER_EXTCFG() g_PlayerExtCfg[g_Vars.currentplayerstats->mpindex & 3]
 #define PLAYER_DEFAULT_FOV playerGetDefaultFovY(g_Vars.currentplayerstats->mpindex)
@@ -568,6 +580,17 @@ extern s32 g_NetMode;
 
 s32 playerGetCount(void);
 s32 playerGetLocalCount(void);
+
+// Mod Switch
+// 0: Normal
+// 1: GoldenEye X Mod
+// 2: Kakariko Village Mod
+extern s32 g_ModNum;
+// GoldenEye X Mod
+extern struct modelstate g_GexModelStates[NUM_MODELS];
+extern s8 g_GexPropExplosionTypes[];
+// All Solos in Multi Mod
+extern bool g_NotLoadMod;
 
 #else // PLATFORM_N64
 

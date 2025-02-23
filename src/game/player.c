@@ -901,7 +901,11 @@ bool playerSpawnAnti(struct chrdata *hostchr, bool force)
 
 		if (hostchr->bodynum == BODY_SKEDAR) {
 			g_Vars.antiheadnum = HEAD_MRBLONDE;
+#ifdef PLATFORM_N64
 			g_Vars.antibodynum = BODY_MRBLONDE;
+#else // PD Plus Mod
+			g_Vars.antibodynum = BODY_PRESIDENT_CLONE; // Skedar
+#endif
 		} else {
 			g_Vars.antiheadnum = hostchr->headnum;
 			g_Vars.antibodynum = hostchr->bodynum;
@@ -1632,7 +1636,16 @@ void playersBeginMpSwirl(void)
 	g_MpSwirlForwardSpeed = 0;
 	g_MpSwirlDistance = 80;
 
+#ifdef PLATFORM_N64 // GoldenEye X Mod
 	envChooseAndApply(mainGetStageNum(), false);
+#else
+	s32 stagenum;
+	stagenum = mainGetStageNum();
+	if (g_ModNum == MOD_GEX) {
+		stagenum += 0x60;
+	}
+	envChooseAndApply(stagenum, false);
+#endif
 }
 
 void playerTickMpSwirl(void)
@@ -2121,6 +2134,22 @@ void playerTickCutscene(bool arg0)
 f32 playerGetCutsceneBlurFrac(void)
 {
 	return g_CutsceneBlurFrac;
+}
+
+void playerClampGunZoomFovY(s32 playernum)
+{
+	struct player *player = g_Vars.players[playernum];
+	if (!player) {
+		return;
+	}
+
+	for (s32 index = 0; index < ARRAYCOUNT(player->gunzoomfovs); ++index) {
+		if (player->gunzoomfovs[index] < ADJUST_ZOOM_FOV(2)) {
+			player->gunzoomfovs[index] = ADJUST_ZOOM_FOV(2);
+		} else if (player->gunzoomfovs[index] > ADJUST_ZOOM_FOV(60)) {
+			player->gunzoomfovs[index] = ADJUST_ZOOM_FOV(60);
+		}
+	}
 }
 
 void playerSetZoomFovY(f32 fovy, f32 timemax)
@@ -3132,6 +3161,9 @@ void playerUpdateShake(void)
 void playerAutoWalk(s16 aimpad, u8 walkspeed, u8 turnspeed, u8 lookup, u8 dist)
 {
 	playerSetTickMode(TICKMODE_AUTOWALK);
+
+	// Prevents momentum from being preserved. Fixes potential softlock during The Duel.
+	g_Vars.currentplayer->resetheadpos = true;
 
 	g_Vars.currentplayer->autocontrol_aimpad = aimpad;
 	g_Vars.currentplayer->autocontrol_walkspeed = walkspeed;
